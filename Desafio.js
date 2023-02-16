@@ -9,8 +9,9 @@ class ProductManager{
        return this.products
     }
     addProduct(newProduct){
-        const product = this.products.find((product) => product.code === newProduct.code)
-        if(product){
+        const product = this.products.find((product => product.code === newProduct.code))
+        if
+        (product){
             console.log("Este producto ya se encuentra registrado")
         }else{
             this.products.push(newProduct)
@@ -18,8 +19,9 @@ class ProductManager{
         }               
     }
     getProductById(id){
-        const product = this.products.find((product) => product.id === id);
-        if(product){
+        const product = this.products.find((product => product.id === id));
+        if
+        (product){
             console.log("El producto consultado es: ", product)
         }
     }
@@ -47,12 +49,6 @@ console.log( prueba.getProduct());
 prueba.addProduct(new Product("Vaso", "Vaso de Crystal", 1250, "Sin Imagen", "crystalbc", 250))
 
 console.log(prueba.getProduct());
-
-// se repite el producto
-prueba.addProduct(new Product("Vaso", "Vaso de Crystal", 1250, "Sin Imagen", "crystalbc", 250))
-
-
-
 
 const productoAgregado = prueba.getProduct() 
 const idCreado = productoAgregado[0].id;
