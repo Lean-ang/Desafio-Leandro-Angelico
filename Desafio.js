@@ -1,59 +1,64 @@
-import { randomUUID } from 'crypto'
-
 class ProductManager{
-    products
     constructor(){
         this.products = []
     }
     getProduct(){
+
        return this.products
     }
+
     addProduct(newProduct){
-        const product = this.products.find((product => product.code === newProduct.code))
-        if
-        (product){
-            console.log("Este producto ya se encuentra registrado")
-        }else{
-            this.products.push(newProduct)
-            console.log("El producto se agrego con exito")
-        }               
+         if (!this.products.find((product) => product.code === newProduct.code)) {
+            newProduct['id'] = this.increaseId();
+            this.products.push(newProduct);
+        } 
+    }    
+    //Use una guia de stack overflow para hacerlo
+    increaseId = () => {
+        const count = this.products.length;
+        const idIcrease = (count > 0) ? this.products[count - 1].id + 1 : 1;
+
+        return idIcrease;
     }
-    getProductById(id){
-        const product = this.products.find((product => product.id === id));
-        if
-        (product){
-            console.log("El producto consultado es: ", product)
-        }
-    }
+    
+    getProductById(id) {
+        if (this.products.find((product) => product.id === id)) {
+
+            return this.products.find((product) => product.id === id);
+         } 
+        else {
+
+             return 'Not found';
+         }
+     }    
 }
 
 class Product{
     
-    constructor(title, description, price, thumbnail, code, stock, id){
-        this.id = id || randomUUID()
+    constructor(title, description, price, thumbnail, code, stock){
         this.title = title 
         this.description = description
         this.price = price
         this.thumbnail = thumbnail 
         this.code = code 
         this.stock = stock 
-    }   
+    }       
        }
  
 //PRUEBAS
 
-const prueba = new ProductManager;
+const product0 = new Product("Copa de crital", "El cristal mas fino", "1200", "Not Found","0","138");
 
-console.log( prueba.getProduct());
+const product1 = new Product("Vaso Cervezero","El mas grande el mercado", "900", "Not Found", "1", "93");
 
-prueba.addProduct(new Product("Vaso", "Vaso de Crystal", 1250, "Sin Imagen", "crystalbc", 250))
+const product2 = new Product("Vaso", "Tamaño de 250ml ", "500", "Not Found", "2", "600");
 
-console.log(prueba.getProduct());
+const prueba = new ProductManager();
 
-const productoAgregado = prueba.getProduct() 
-const idCreado = productoAgregado[0].id;
-const idNoencontrado = "6s45d65shnsu7623sad24"
+prueba.addProduct(product0)
+prueba.addProduct(product1)
+prueba.addProduct(product2)
 
-prueba.getProductById(idCreado);
-
-prueba.getProductById(idNoencontrado);
+console.log(prueba.getProduct())
+console.log(prueba.getProductById(1))
+console.log(prueba.getProductById(2))
